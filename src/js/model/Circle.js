@@ -1,4 +1,4 @@
-class MyRect {
+class Circle {
     constructor(posX,posY,tam){
         this.posX = posX;
         this.posY = posY;
@@ -7,7 +7,7 @@ class MyRect {
 
     draw(){
         fill(255,0,0);
-        rect(this.posX,this.posY,this.tam,this.tam);
+        ellipse(this.posX,this.posY,this.tam,this.tam);
     }
 
     getTam(){
