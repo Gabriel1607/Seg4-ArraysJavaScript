@@ -1,8 +1,6 @@
-class Circle {
+class Circle extends Figure {
     constructor(posX,posY,tam){
-        this.posX = posX;
-        this.posY = posY;
-        this.tam  = tam;
+        super();
     }
 
     draw(){
