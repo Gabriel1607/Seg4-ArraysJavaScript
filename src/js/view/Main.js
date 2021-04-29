@@ -67,7 +67,7 @@ function drawScreen(){
             text("◯",((width/6)*4)+53,((height/4)*3)+37);
             
             drawRects();
-           
+           drawCircs();
            
             break;
     }
@@ -115,12 +115,12 @@ function changeScreen(){
                 if(((width/6)*3<mouseX&&mouseX<((width/6)*3)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
                         dupTam();
-                    console.log("dupTam");
+                    //console.log("dupTam");
                 }
                 //Boton de crear arreglo de circulos
                 if(((width/6)*4<mouseX&&mouseX<((width/6)*4)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
-                    
+                    arrayCircs();
                     console.log("circArray");
                 }
                 break;
@@ -169,12 +169,24 @@ function addRects(){
 function drawRects(){
     for (let index = 0; index < rectList.length; index++) {
         rectList[index].draw();   
+        rectList[index].move();
     }
 }
 function dupTam(){
 rectList.forEach(element => {
     element.setTam(60);
 });
+}
+function arrayCircs(){
+    circList = rectList.map(function(c){
+    return c = new Circle(c.posX,c.posY+100,c.tam);
+    })
+}
+function drawCircs(){
+for (let i = 0; i < circList.length; i++) {
+    circList[i].draw;
+    circList[i].move;
+}
 }
 class Figure {
     constructor(posX,posY,tam){
@@ -187,25 +199,43 @@ class Figure {
 class Circle extends Figure {
     constructor(posX,posY,tam){
         super(posX,posY,tam);
+        this.speed = random(1, 2);
+        this.amount = int(random(1, 10));
     }
 
     draw(){
         fill(255,0,0);
         ellipse(this.posX,this.posY,this.tam,this.tam);
     }
+    move(){
+        this.posY=this.posY+this.speed;
+        if(this.posY>(height/2)-70||this.posY<=0){
+            this.speed= -this.speed;
+        }
+    }
+    setTam(tam){
+        this.tam = tam;
+    }
 
 }
 class Rectangle extends Figure {
     constructor(posX,posY,tam){
         super(posX,posY,tam);
+        this.speed = random(1, 2);
+        this.amount = int(random(1, 10));
     }
 
     draw(){
         fill(255,0,0);
         rect(this.posX,this.posY,this.tam,this.tam);
+        fill(255);
+        text(this.amount, this.posX+(this.tam/2), this.posY+(this.tam/2)+10);
     }
-    getTam(){
-        return this.tam;
+    move(){
+    this.posY=this.posY+this.speed;
+    if(this.posY>(height/2)-70||this.posY<=0){
+        this.speed= -this.speed;
+    }
     }
 
     setTam(tam){
