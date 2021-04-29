@@ -1,6 +1,6 @@
 class Rectangle extends Figure {
     constructor(posX,posY,tam){
-        super();
+        super(posX,posY,tam);
     }
 
     draw(){

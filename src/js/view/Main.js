@@ -3,12 +3,15 @@
 let screen;
 let figNum;
 let mistake;
-
+let rectList = [];
+let circList = [];
+let MyRec;
 function setup(){
     createCanvas(800,400);
     screen=0;
     figNum=1;
     mistake=false;
+    MyRec= new Rectangle (100,100,100);
 }
 
 
@@ -61,7 +64,9 @@ function drawScreen(){
             text("-",((width/6)*2)+53,((height/4)*3)+37);
             text("tam x 2",((width/6)*3)+53,((height/4)*3)+37);
             text("◯",((width/6)*4)+53,((height/4)*3)+37);
-            
+            //arrayRects();
+            //console.log(rectList);
+            MyRec.draw();
             break;
     }
 }
@@ -118,7 +123,7 @@ function changeScreen(){
 function Increase(){
     
             if(figNum<10){  
-             
+                mistake=false;
         figNum++;
     }else{
         mistake=true;
@@ -128,7 +133,7 @@ function Increase(){
 function Decrease(){
     
             if(figNum>1){  
-             
+                mistake=false;
         figNum--;
     }else{
         mistake=true;
@@ -143,4 +148,39 @@ if(mistake){
 }
 }
 
+/*function arrayRects(){
+    for (let index = 0; index < figNum; index++) {
+        
+        rectList.push(new Rectangle(10,10,10));  
+    }
+}*/
+class Figure {
+    constructor(posX,posY,tam){
+        this.posX = posX;
+        this.posY = posY;
+        this.tam  = tam;
+    }
+    
+}
+class Circle extends Figure {
+    constructor(posX,posY,tam){
+        super(posX,posY,tam);
+    }
+
+    draw(){
+        fill(255,0,0);
+        ellipse(this.posX,this.posY,this.tam,this.tam);
+    }
+
+}
+class Rectangle extends Figure {
+    constructor(posX,posY,tam){
+        super(posX,posY,tam);
+    }
+
+    draw(){
+        fill(255,0,0);
+        rect(this.posX,this.posY,this.tam,this.tam);
+    }
+}
 

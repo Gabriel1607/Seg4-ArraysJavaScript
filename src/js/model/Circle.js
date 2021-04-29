@@ -1,6 +1,6 @@
 class Circle extends Figure {
     constructor(posX,posY,tam){
-        super();
+        super(posX,posY,tam);
     }
 
     draw(){

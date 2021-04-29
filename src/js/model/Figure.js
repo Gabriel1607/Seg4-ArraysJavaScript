@@ -4,5 +4,5 @@ class Figure {
         this.posY = posY;
         this.tam  = tam;
     }
-    draw();
+    
 }
