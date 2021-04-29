@@ -16,8 +16,15 @@ function draw(){
   drawScreen(); 
     
 //console.log(mouseX);
-console.log(figNum);
+//console.log(figNum);
 }
+function mousePressed(){
+    changeScreen();
+}
+
+
+
+
 
 function drawScreen(){
     switch(screen){
@@ -40,6 +47,7 @@ function drawScreen(){
             mistakeMessage();
         break;  
         case 1:
+            rectMode(CORNER);
             background(120,206,232);
             fill(255);
             rect((width/6)*1,(height/4)*3,105,55);
@@ -57,37 +65,81 @@ function drawScreen(){
             break;
     }
 }
-function mousePressed(){
-    Increase();
-    Decrease();
+
+function changeScreen(){
+    switch(screen){
+        case 0:
+        //Boton de aumentar
+            if(((width/2)+100-(55/2)<mouseX&&mouseX<(width/2)+100+(55/2))&&
+        (height/2)-(55/2)<mouseY&&mouseY<(height/2)+(55/2)){
+            Increase();
+        }
+        //Boton de reducir
+        if(((width/2)-100-(55/2)<mouseX&&mouseX<(width/2)-100+(55/2))&&
+        (height/2)-(55/2)<mouseY&&mouseY<(height/2)+(55/2)){
+            Decrease();
+        }
+        //Boton de continuar
+            if(((width/2)-(305/2)<mouseX&&mouseX<(width/2)+(305/2))&&
+            (height/2)+100-(55/2)<mouseY&&mouseY<(height/2)+100+(55/2)){
+                
+                screen=1;
+            
+        }
+            break;
+            case 1:
+                //Boton de aumentar
+                if(((width/6)*1<mouseX&&mouseX<((width/6)*1)+105)&&
+                (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
+                    Increase();
+                    console.log(figNum);
+                }
+                //Boton de reducir
+                if(((width/6)*2<mouseX&&mouseX<((width/6)*2)+105)&&
+                (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
+                    Decrease();
+                    console.log(figNum);
+                }
+                //Boton de duplicar tamaños
+                if(((width/6)*3<mouseX&&mouseX<((width/6)*3)+105)&&
+                (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
+                    
+                    console.log("dupliTam");
+                }
+                //Boton de crear arreglo de circulos
+                if(((width/6)*4<mouseX&&mouseX<((width/6)*4)+105)&&
+                (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
+                    
+                    console.log("circArray");
+                }
+                break;
+}
 }
 function Increase(){
-    if(((width/2)+100-(55/2)<mouseX&&mouseX<(width/2)+100+(55/2))&&
-        (height/2)-(55/2)<mouseY&&mouseY<(height/2)+(55/2)){
+    
             if(figNum<10){  
-             mistake=false;
+             
         figNum++;
     }else{
         mistake=true;
     }
-        }
+        
 }
 function Decrease(){
-    if(((width/2)-100-(55/2)<mouseX&&mouseX<(width/2)-100+(55/2))&&
-        (height/2)-(55/2)<mouseY&&mouseY<(height/2)+(55/2)){
+    
             if(figNum>1){  
-             mistake=false;
+             
         figNum--;
     }else{
         mistake=true;
     }
-        }
+        
 }
 function mistakeMessage(){
 if(mistake){
     textSize(30);
    
-    text("Error: El número debe estar entre 1 y 10",400,100)
+    text("El número debe estar entre 1 y 10",400,100)
 }
 }
 
