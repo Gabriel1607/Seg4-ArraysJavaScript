@@ -5,13 +5,13 @@ let figNum;
 let mistake;
 let rectList = [];
 let circList = [];
-
+let size 
 function setup(){
     createCanvas(800,400);
     screen=0;
     figNum=1;
     mistake=false;
-    MyRec= new Rectangle (100,100,100);
+    size=30;
     
 }
 
@@ -114,7 +114,7 @@ function changeScreen(){
                 //Boton de duplicar tamaños
                 if(((width/6)*3<mouseX&&mouseX<((width/6)*3)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
-                    dupTam();
+                        dupTam();
                     console.log("dupTam");
                 }
                 //Boton de crear arreglo de circulos
@@ -157,13 +157,13 @@ if(mistake){
 function arrayRects(){
     for (let index = 0; index < figNum; index++) {
         
-        rectList.push(new Rectangle(60+(60*index),30,30)); 
+        rectList.push(new Rectangle(60+(60*index),30,1*size)); 
         
     }
 }
 function addRects(){
     if(rectList.length<10){
-        rectList.push(new Rectangle(60+(60*rectList.length),30,30)); 
+        rectList.push(new Rectangle(60+(60*rectList.length),30,1*size)); 
     }
 }
 function drawRects(){
@@ -173,7 +173,7 @@ function drawRects(){
 }
 function dupTam(){
 rectList.forEach(element => {
-    element.setTam(element.getTam*2);
+    element.setTam(60);
 });
 }
 class Figure {
