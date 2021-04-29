@@ -5,13 +5,14 @@ let figNum;
 let mistake;
 let rectList = [];
 let circList = [];
-let MyRec;
+
 function setup(){
     createCanvas(800,400);
     screen=0;
     figNum=1;
     mistake=false;
     MyRec= new Rectangle (100,100,100);
+    
 }
 
 
@@ -64,9 +65,10 @@ function drawScreen(){
             text("-",((width/6)*2)+53,((height/4)*3)+37);
             text("tam x 2",((width/6)*3)+53,((height/4)*3)+37);
             text("◯",((width/6)*4)+53,((height/4)*3)+37);
-            //arrayRects();
-            //console.log(rectList);
-            MyRec.draw();
+            
+            drawRects();
+           
+           
             break;
     }
 }
@@ -87,7 +89,7 @@ function changeScreen(){
         //Boton de continuar
             if(((width/2)-(305/2)<mouseX&&mouseX<(width/2)+(305/2))&&
             (height/2)+100-(55/2)<mouseY&&mouseY<(height/2)+100+(55/2)){
-                
+                arrayRects();
                 screen=1;
             
         }
@@ -97,13 +99,17 @@ function changeScreen(){
                 if(((width/6)*1<mouseX&&mouseX<((width/6)*1)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
                     Increase();
-                    console.log(figNum);
+                    addRects();
+                    //console.log(figNum);
+                    console.log(rectList.length);
                 }
                 //Boton de reducir
                 if(((width/6)*2<mouseX&&mouseX<((width/6)*2)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
                     Decrease();
-                    console.log(figNum);
+                    rectList.pop();
+                    //console.log(figNum);
+                    console.log(rectList.length);
                 }
                 //Boton de duplicar tamaños
                 if(((width/6)*3<mouseX&&mouseX<((width/6)*3)+105)&&
@@ -148,12 +154,25 @@ if(mistake){
 }
 }
 
-/*function arrayRects(){
+function arrayRects(){
     for (let index = 0; index < figNum; index++) {
         
-        rectList.push(new Rectangle(10,10,10));  
+        rectList.push(new Rectangle(60+(60*index),30,30)); 
+        
     }
-}*/
+}
+function addRects(){
+    if(rectList.length<10){
+        rectList.push(new Rectangle(60+(60*rectList.length),30,30)); 
+    }
+}
+function drawRects(){
+    for (let index = 0; index < rectList.length; index++) {
+        rectList[index].draw();
+        
+    }
+    
+}
 class Figure {
     constructor(posX,posY,tam){
         this.posX = posX;
