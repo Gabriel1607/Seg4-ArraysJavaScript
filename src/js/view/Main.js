@@ -6,8 +6,10 @@ let mistake;
 let rectList = [];
 let circList = [];
 let size 
+let paintCircs;
 function setup(){
     createCanvas(800,400);
+    paintCircs = false;
     screen=0;
     figNum=1;
     mistake=false;
@@ -67,8 +69,9 @@ function drawScreen(){
             text("◯",((width/6)*4)+53,((height/4)*3)+37);
             
             drawRects();
-           drawCircs();
-           
+            if(paintCircs){
+            drawCircs();
+            }
             break;
     }
 }
@@ -101,7 +104,7 @@ function changeScreen(){
                     Increase();
                     addRects();
                     //console.log(figNum);
-                    console.log(rectList.length);
+                    
                 }
                 //Boton de reducir
                 if(((width/6)*2<mouseX&&mouseX<((width/6)*2)+105)&&
@@ -109,7 +112,7 @@ function changeScreen(){
                     Decrease();
                     rectList.pop();
                     //console.log(figNum);
-                    console.log(rectList.length);
+                    
                 }
                 //Boton de duplicar tamaños
                 if(((width/6)*3<mouseX&&mouseX<((width/6)*3)+105)&&
@@ -121,6 +124,7 @@ function changeScreen(){
                 if(((width/6)*4<mouseX&&mouseX<((width/6)*4)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
                     arrayCircs();
+                   
                     console.log("circArray");
                 }
                 break;
@@ -179,13 +183,25 @@ rectList.forEach(element => {
 }
 function arrayCircs(){
     circList = rectList.map(function(c){
-    return c = new Circle(c.posX,c.posY+100,c.tam);
+    return c = new Circle(c.posX,c.posY+200,c.tam);
     })
+    paintCircs = true;
+    console.log(circList.length);
+    console.log(circList[0]); 
+    console.log(circList[1]);
+    console.log(circList[2]); 
+    console.log(circList[3]); 
+    console.log(circList[4]); 
+    console.log(circList[5]); 
+    console.log(circList[6]); 
+    console.log(circList[7]); 
+    console.log(circList[8]); 
+    console.log(circList[9]);    
 }
 function drawCircs(){
 for (let i = 0; i < circList.length; i++) {
     circList[i].draw;
-    circList[i].move;
+    //circList[i].move;
 }
 }
 class Figure {
@@ -206,6 +222,8 @@ class Circle extends Figure {
     draw(){
         fill(255,0,0);
         ellipse(this.posX,this.posY,this.tam,this.tam);
+        fill(255);
+        text(this.amount, this.posX+(this.tam/2), this.posY+(this.tam/2)+10);
     }
     move(){
         this.posY=this.posY+this.speed;
@@ -216,6 +234,7 @@ class Circle extends Figure {
     setTam(tam){
         this.tam = tam;
     }
+   
 
 }
 class Rectangle extends Figure {
