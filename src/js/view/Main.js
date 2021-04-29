@@ -114,8 +114,8 @@ function changeScreen(){
                 //Boton de duplicar tamaños
                 if(((width/6)*3<mouseX&&mouseX<((width/6)*3)+105)&&
                 (height/4)*3<mouseY&&mouseY<(height/4)*3+55){
-                    
-                    console.log("dupliTam");
+                    dupTam();
+                    console.log("dupTam");
                 }
                 //Boton de crear arreglo de circulos
                 if(((width/6)*4<mouseX&&mouseX<((width/6)*4)+105)&&
@@ -168,10 +168,13 @@ function addRects(){
 }
 function drawRects(){
     for (let index = 0; index < rectList.length; index++) {
-        rectList[index].draw();
-        
+        rectList[index].draw();   
     }
-    
+}
+function dupTam(){
+rectList.forEach(element => {
+    element.setTam(element.getTam*2);
+});
 }
 class Figure {
     constructor(posX,posY,tam){
@@ -200,6 +203,13 @@ class Rectangle extends Figure {
     draw(){
         fill(255,0,0);
         rect(this.posX,this.posY,this.tam,this.tam);
+    }
+    getTam(){
+        return this.tam;
+    }
+
+    setTam(tam){
+        this.tam = tam;
     }
 }
 
