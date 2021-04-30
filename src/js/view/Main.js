@@ -70,7 +70,7 @@ function drawScreen(){
             
             drawRects();
             drawCircs();
-            
+            console.log(paintCircs);
             break;
     }
 }
@@ -168,10 +168,20 @@ function addRects(){
     if(0<rectList.length&&rectList.length<10){
         rectList.push(new Rectangle(60+(60*rectList.length),30,1*size)); 
     }
+    if(paintCircs){
+        if(0<circList.length&&circList.length<10){
+            circList.push(new Circle(60+(60*circList.length),230,1*size)); 
+        }   
+    }
 }
 function removeRects(){
     if(1<rectList.length&&rectList.length<11){
         rectList.pop();
+    }
+    if(paintCircs){
+        if(1<circList.length&&circList.length<11){
+            circList.pop();
+        }   
     }
 }
 function drawRects(){
@@ -184,11 +194,17 @@ function dupTam(){
 rectList.forEach(element => {
     element.setTam(60);
 });
+if(paintCircs){
+    circList.forEach(element => {
+        element.setTam(60);
+    });
+}
 }
 function arrayCircs(){
     circList = rectList.map(function(c){
     return c = new Circle(c.posX,c.posY+200,c.tam);
     })
+    paintCircs = true;
    /* console.log(circList.length);
     console.log(circList[0]); 
     console.log(circList[1]);
@@ -226,7 +242,7 @@ class Circle extends Figure {
         fill(255,0,0);
         ellipse(this.posX,this.posY,this.tam,this.tam);
         fill(255);
-        text(this.amount, this.posX+(this.tam/2), this.posY+(this.tam/2)+10);
+        text(this.amount, this.posX, this.posY+10);
     }
     move(){
         this.posX=this.posX+this.speed;
